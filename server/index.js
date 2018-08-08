@@ -1,10 +1,9 @@
-import path from 'path'
-import express from 'express'
-import morgan from 'morgan'
-import compression from 'compression'
-import session from 'express-session'
-import socketio from 'socket.io'
-import { userInfo } from 'os'
+const path = require('path')
+const express = require('express')
+const morgan = require('morgan')
+const compression = require('compression')
+const session = require('express-session')
+const socketio = require('socket.io')
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
