@@ -1,0 +1,14 @@
+{
+  "name": "ShaiLagarde",
+  "version": "1.0.0",
+  "description": "Shai Lagarde's newest portal",
+  "engines": {
+    "node": ">= 7.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "author": "Anton Holmes",
+  "license": "MIT"
+}
