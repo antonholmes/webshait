@@ -4,22 +4,22 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
-// const socketio = require('socket.io')
+const socketio = require('socket.io')
 // import { userInfo } from 'os'
 
-// const SequelizeStore = require('connect-session-sequelize')(session.Store)
-// const db = require('./db')
-// const sessionStore = new SequelizeStore({ db })
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const db = require('./db')
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 4321
 const app = express()
 
 module.exports = app
 
-// if (process.env.NODE_ENV === 'test') {
-//   after('close the session store', () => sessionStore.stopExpiringSessions())
-// }
+if (process.env.NODE_ENV === 'test') {
+  after('close the session store', () => sessionStore.stopExpiringSessions())
+}
 
-// if (process.env.NODE_ENV === 'production') require('../secrets')
+if (process.env.NODE_ENV === 'production') require('../secrets')
 
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
@@ -40,14 +40,14 @@ const createApp = () => {
   // Compression
   app.use(compression())
   // Session with Passport
-  // app.use(
-  //   session({
-  //     secret: process.env.SESSION_SECRET || 'you will not find this anyway',
-  //     store: sessionStore,
-  //     resave: false,
-  //     saveUninitialized: false,
-  //   })
-  // )
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'you should not find this anyway',
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false,
+    })
+  )
   app.use(passport.initialize())
   app.use(passport.session())
   // Auth and API routes
@@ -88,8 +88,8 @@ const startListening = () => {
 const syncDb = () => db.sync()
 
 async function bootApp() {
-  // await sessionStore.sync()
-  // await syncDb()
+  await sessionStore.sync()
+  await syncDb()
   await createApp()
   await startListening()
 }
