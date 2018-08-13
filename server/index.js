@@ -9,7 +9,7 @@ const socketio = require('socket.io')
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const sessionStore = new SequelizeStore({ db })
+const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 4321
 const app = express()
 
@@ -29,14 +29,14 @@ passport.deserializeUser(async (id, done) => {
   } catch (err) {
     done(err)
   }
-});
+})
 
 const createApp = () => {
   // Logging
   app.use(morgan('dev'))
   // Body Parsing
   app.use(express.json())
-  app.use(express.urlencoded({ extended: true }))
+  app.use(express.urlencoded({extended: true}))
   // Compression
   app.use(compression())
   // Session with Passport
@@ -45,14 +45,14 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'you should not find this anyway',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: false
     })
   )
   app.use(passport.initialize())
   app.use(passport.session())
   // Auth and API routes
-  // app.use('/auth', require('./auth'))
-  // app.use('/api', require('./api'))
+  app.use('/auth', require('./auth'))
+  app.use('/api', require('./api'))
   // Static File-Serving
   app.use(express.static(path.join(__dirname, '..', 'public')))
   // Request Error Handling
@@ -64,7 +64,7 @@ const createApp = () => {
     } else {
       next()
     }
-  });
+  })
   // Index.html
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))

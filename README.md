@@ -1,4 +1,4 @@
-# [Shai Lagarde](https://shailagarde.herokuapp.com/)
+# [Shai Lagarde](https://shailagarde.com/)
 
 _Shai Lagarde's newest portal!_
 
@@ -28,4 +28,4 @@ For the front-end, modular components were built and styled using the following:
 
 # :satellite: Deployment
 
-Shai Lagarde | Love Chic :tm: was deployed using Heroku, and is accessible through: https://shailagarde.herokuapp.com
+Shai Lagarde | Love Chic :tm: was deployed using Heroku, and is accessible through: https://shailagarde.com
