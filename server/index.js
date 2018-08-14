@@ -4,14 +4,12 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
-const socketio = require('socket.io')
-// import { userInfo } from 'os'
-
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 4321
 const app = express()
+const socketio = require('socket.io')
 
 module.exports = app
 
